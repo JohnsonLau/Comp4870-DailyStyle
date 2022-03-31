@@ -31,6 +31,7 @@ function ListClothes() {
   useEffect(() => {
     getClothings();
   }, []);
+
   return clothes == null ? (
     <div>Loading</div>
   ) : (

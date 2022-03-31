@@ -72,6 +72,23 @@ export default function CustomCard({ cloth }) {
     setOpen(false);
   }
 
+  const deleteCloth = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+      axios.baseUrl = baseUrl;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      await axios
+        .delete("/api/clothings/" + id)
+        .then()
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+    handleClose();
+  };
+
   return (
       <Card sx={{ maxWidth: 345, width: "100%", height: "100%" }}>
         <CardActionArea 
@@ -127,8 +144,8 @@ export default function CustomCard({ cloth }) {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button>Confirm</Button>
-            <Button>Cancel</Button>
+            <Button onClick={deleteCloth}>Confirm</Button>
+            <Button onClick={handleClose} autoFocus>Cancel</Button>
           </DialogActions>
         </Dialog>
       </Card>
