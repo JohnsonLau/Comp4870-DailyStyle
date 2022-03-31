@@ -12,7 +12,12 @@ import axios from "axios";
 import { baseUrl } from "../lib/constant";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import { spacing } from '@mui/system';
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 export default function CustomCard({ cloth }) {
   const [id, title, description, image, imageType, tags, isFavorite] = [
@@ -57,47 +62,75 @@ export default function CustomCard({ cloth }) {
       navigation(`/EditCloth/${id}`);
   }
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   return (
-    <Card sx={{ maxWidth: 345, width: "100%", height: "100%" }}>
-      <CardActionArea 
-        onClick={handleEdit}>
-        <CardMedia
-          component="img"
-          image={imageType + "," + image}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-          {
-            cloth.tags && cloth.tags.map((tag) => {
-              return (
-                <Chip label={tag.title}/>
-              )
-            })
-          }
-        </CardContent>
-      </CardActionArea>
-      <CardActions disableSpacing>
-          <IconButton onClick={handleFavorite}>
-              {
-                    isFavoriteState ?
-                    <FavoriteIcon sx={{color: pink[500]}}/> :
-                    <FavoriteIcon />
-              }
-          </IconButton>
-          <Button
-            sx={{ ml: "auto"}}
-            variant="contained"
-            color="error"
-          >
-            Delete
-          </Button>
-      </CardActions>
-    </Card>
+      <Card sx={{ maxWidth: 345, width: "100%", height: "100%" }}>
+        <CardActionArea 
+          onClick={handleEdit}>
+          <CardMedia
+            component="img"
+            image={imageType + "," + image}
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {description}
+            </Typography>
+            {
+              cloth.tags && cloth.tags.map((tag) => {
+                return (
+                  <Chip label={tag.title}/>
+                )
+              })
+            }
+          </CardContent>
+        </CardActionArea>
+        <CardActions disableSpacing>
+            <IconButton onClick={handleFavorite}>
+                {
+                      isFavoriteState ?
+                      <FavoriteIcon sx={{color: pink[500]}}/> :
+                      <FavoriteIcon />
+                }
+            </IconButton>
+            <Button
+              sx={{ ml: "auto"}}
+              variant="contained"
+              color="error"
+              onClick={handleClickOpen}
+            >
+              Delete
+            </Button>
+        </CardActions>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+        >
+          <DialogTitle>
+                Delete {title}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete {title}?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button>Confirm</Button>
+            <Button>Cancel</Button>
+          </DialogActions>
+        </Dialog>
+      </Card>
   );
 }
