@@ -12,6 +12,7 @@ import axios from "axios";
 import { baseUrl } from "../lib/constant";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { spacing } from '@mui/system';
 
 export default function CustomCard({ cloth }) {
   const [id, title, description, image, imageType, tags, isFavorite] = [
@@ -81,7 +82,7 @@ export default function CustomCard({ cloth }) {
           }
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions disableSpacing>
           <IconButton onClick={handleFavorite}>
               {
                     isFavoriteState ?
@@ -89,6 +90,13 @@ export default function CustomCard({ cloth }) {
                     <FavoriteIcon />
               }
           </IconButton>
+          <Button
+            sx={{ ml: "auto"}}
+            variant="contained"
+            color="error"
+          >
+            Delete
+          </Button>
       </CardActions>
     </Card>
   );
