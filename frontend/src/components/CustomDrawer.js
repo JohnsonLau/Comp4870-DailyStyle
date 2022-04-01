@@ -26,7 +26,6 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import { darkTheme, lightTheme } from "../lib/constant";
 
 export default function CustomDrawer({setTheme}) {
-  const navigation = useNavigate();
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0();
 
   const [open, setOpen] = useState(false);

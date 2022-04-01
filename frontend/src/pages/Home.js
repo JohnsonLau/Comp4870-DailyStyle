@@ -1,12 +1,10 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { baseUrl } from "../lib/constant";
 import {
     Box,
     Button,
     Chip,
-    Container,
     Divider,
     Grid,
     MenuItem,
@@ -15,10 +13,11 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import CustomCard from "../components/CustomCard";
+import Landing from "./Landing";
 
 function Home() {
     axios.defaults.baseURL = baseUrl;
-    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
     const [tags, setTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
@@ -118,15 +117,13 @@ function Home() {
                             <Button variant="contained" onClick={getClothings}>Generate</Button>
 
                             {clothes.map((cloth) => (
-                                <CustomCard key={cloth.id} cloth={cloth} />
+                                <CustomCard key={cloth.id} cloth={cloth} clothes={clothes} setClothes={setClothes}/>
                             ))}
                         </Grid>
                     </Box>
                 </div>
             ) : (
-                <div>
-                    <p>Please login first</p>
-                </div>
+                <Landing/>
             )}
         </div>
     );

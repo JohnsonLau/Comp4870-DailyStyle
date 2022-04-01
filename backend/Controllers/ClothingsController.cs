@@ -36,8 +36,6 @@ namespace backend.Controllers
                 {
                     int Tagid = Int32.Parse(TagId);
                     Tag tag = await _context.Tags.Include(i => i.Clothings).Where(i => i.Id == Tagid).FirstAsync();
-                    Console.WriteLine("Tag: " + tag.Title);
-                    Console.WriteLine("Clothings: " + tag.Clothings.First().Title);
                     int randomIndex = new Random().Next(0, tag.Clothings.Count);
                     int currentIntex = 0;
                     foreach (Clothing clothing in tag.Clothings)

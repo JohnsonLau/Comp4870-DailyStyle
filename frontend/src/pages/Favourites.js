@@ -20,7 +20,6 @@ function Favourites() {
         .get("/api/clothings/fav")
         .then((response) => {
           setClothes([...clothes, ...response.data]);
-          console.log(clothes);
         })
         .catch((error) => {
           toast.error(error.message);
