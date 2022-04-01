@@ -19,7 +19,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function CustomCard({ cloth }) {
+export default function CustomCard({ cloth, clothes, setClothes }) {
   const [id, title, description, image, imageType, tags, isFavorite] = [
     cloth.id,
     cloth.title ? cloth.title : "No Title",
@@ -79,14 +79,18 @@ export default function CustomCard({ cloth }) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       await axios
         .delete("/api/clothings/" + id)
-        .then()
+        .then(res=>{
+          setClothes(clothes.filter(cloth => cloth.id !== id));
+          handleClose();
+        })
         .catch((error) => {
           toast.error(error.message);
+          handleClose();
         });
     } catch (error) {
       toast.error(error.message);
+      handleClose();
     }
-    handleClose();
   };
 
   return (

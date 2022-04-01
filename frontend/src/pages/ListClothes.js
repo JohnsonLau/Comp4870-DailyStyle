@@ -37,7 +37,7 @@ function ListClothes() {
   ) : (
     <div className="mt-4 mx-4 flex flex-wrap gap-4 justify-center">
       {clothes.map((cloth) => (
-        <CustomCard key={cloth.id} cloth={cloth} />
+        <CustomCard key={cloth.id} cloth={cloth} clothes={clothes} setClothes={setClothes}/>
       ))}
     </div>
   );

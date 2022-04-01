@@ -12,9 +12,6 @@ function Favourites() {
   const { getAccessTokenSilently } = useAuth0();
 
   const [clothes, setClothes] = useState([]);
-  useEffect(() => {
-    console.log(clothes);
-  }, [clothes]);
   const getClothings = async () => {
     try {
       const token = await getAccessTokenSilently();
@@ -41,7 +38,7 @@ function Favourites() {
   ) : (
     <div className="mt-4 mx-4 flex flex-wrap gap-4 justify-center">
       {clothes.map((cloth) => (
-        <CustomCard key={cloth.id} cloth={cloth} />
+        <CustomCard key={cloth.id} cloth={cloth} clothes={clothes} setClothes={setClothes}/>
       ))}
     </div>
   );
