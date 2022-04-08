@@ -12,7 +12,6 @@ import {
   Container,
   Divider,
   FormControl,
-  IconButton,
   Input,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -173,6 +172,7 @@ function AddClothes() {
               />
 
               <Button
+                sx={{ mb: 1}}
                 color="primary"
                 aria-label="upload picture"
                 component="span"
@@ -214,6 +214,7 @@ function AddClothes() {
               loading={loading}
               renderInput={(params) => (
                 <TextField
+                  margin="dense"
                   {...params}
                   label="Tags"
                   InputProps={{
@@ -230,7 +231,7 @@ function AddClothes() {
                 />
               )}
             />
-            <Button variant="contained" type="submit">
+            <Button sx={{ mt: 2}} variant="contained" type="submit">
               Add
             </Button>
           </FormControl>
@@ -241,11 +242,11 @@ function AddClothes() {
         <b>Add new tag</b>
       </Divider>
 
-      <Container maxWidth="sm" sx={{ paddingTop: 1 }}>
+      <Container maxWidth="sm">
         <form onSubmit={postTag}>
           <FormControl fullWidth margin="normal">
             <TextField required id="tag" label="Tag" variant="outlined" />
-            <Button variant="contained" type="submit">
+            <Button sx={{ mt: 2}} variant="contained" type="submit">
               Add
             </Button>
           </FormControl>
