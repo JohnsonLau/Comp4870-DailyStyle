@@ -174,6 +174,7 @@ function EditCloth() {
                             />
 
                             <Button
+                                sx={{ mb: 1}}
                                 color="primary"
                                 aria-label="upload picture"
                                 component="span"
@@ -200,6 +201,7 @@ function EditCloth() {
                             focused
                         />
                         <Select
+                            sx={{ mt: 1}}
                             multiple
                             value={selectedTags}
                             onChange={(event) => {
@@ -233,7 +235,7 @@ function EditCloth() {
                                 );
                             })}
                         </Select>
-                        <Button variant="contained" type="submit">
+                        <Button sx={{ mt: 2}} variant="contained" type="submit">
                             Edit
                         </Button>
                     </FormControl>
