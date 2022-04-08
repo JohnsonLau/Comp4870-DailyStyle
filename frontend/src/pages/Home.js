@@ -81,40 +81,50 @@ function Home() {
                             sx={{mt: 2}}
                         >
                             <Select
-                                multiple
-                                value={selectedTags}
-                                onChange={(event) => {
-                                    const {
-                                        target: { value },
-                                    } = event;
-                                    setSelectedTags(value);
-                                }}
-                                renderValue={(selected) => (
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            flexWrap: "wrap",
-                                            gap: 0.5,
-                                        }}
-                                    >
-                                        {selected.map((value) => (
-                                            <Chip
-                                                key={value.id}
-                                                label={value.title}
-                                            />
-                                        ))}
-                                    </Box>
-                                )}
-                            >
-                                {tags.map((tag) => {
-                                    return (
-                                        <MenuItem key={tag.id} value={tag}>
-                                            {tag.title}
-                                        </MenuItem>
-                                    );
-                                })}
+                                    multiple
+                                    value={selectedTags}
+                                    onChange={(event) => {
+                                        const {
+                                            target: { value },
+                                        } = event;
+                                        setSelectedTags(value);
+                                    }}
+                                    renderValue={(selected) => (
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                flexWrap: "wrap",
+                                                gap: 0.5,
+                                            }}
+                                        >
+                                            {selected.map((value) => (
+                                                <Chip
+                                                    key={value.id}
+                                                    label={value.title}
+                                                />
+                                            ))}
+                                        </Box>
+                                    )}
+                                >
+                                    {tags.map((tag) => {
+                                        return (
+                                            <MenuItem key={tag.id} value={tag}>
+                                                {tag.title}
+                                            </MenuItem>
+                                        );
+                                    })}
                             </Select>
                             <Button variant="contained" onClick={getClothings}>Generate</Button>
+                        </Grid>
+                        <Grid
+                            container
+                            direction="row"
+                            gap={2}
+                            spacing={0}
+                            alignItems="center"
+                            justifyContent="space-around"
+                            sx={{mt: 2, mb: 2}}
+                        >
 
                             {clothes.map((cloth) => (
                                 <CustomCard key={cloth.id} cloth={cloth} clothes={clothes} setClothes={setClothes}/>
