@@ -78,7 +78,7 @@ function Home() {
                             gap={2}
                             spacing={0}
                             alignItems="center"
-                            justifyContent="center"
+                            sx={{mt: 2}}
                         >
                             <Select
                                 multiple
