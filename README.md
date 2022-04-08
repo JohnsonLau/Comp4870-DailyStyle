@@ -4,8 +4,11 @@ Outfit planner. Users will be able to upload images of their outfits and tag it.
 
 ## Demo Account
 Please use 
+
 username: admin
+
 password: Passw0rd
+
 for the demo. This demo account includes preloaded clothes to showcase app.
 
 ## Demo
