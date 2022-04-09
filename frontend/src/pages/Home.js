@@ -6,6 +6,8 @@ import {
     Button,
     Chip,
     Divider,
+    FormControlLabel,
+    FormGroup,
     Grid,
     MenuItem,
     Select,
@@ -14,6 +16,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import CustomCard from "../components/CustomCard";
 import Landing from "./Landing";
+import Switch from '@mui/material/Switch';
 
 function Home() {
     axios.defaults.baseURL = baseUrl;
@@ -47,12 +50,33 @@ function Home() {
     }, [tags]);
 
     const [clothes, setClothes] = useState([]);
+    const [switchChecked, setSwitchChecked] = useState(false);
+
+    const handleSwitchChange = () => {
+        if (!switchChecked) {
+            setSwitchChecked(true);
+        } else {
+            setSwitchChecked(false);
+        }
+    }
 
     const getClothings = async (e) => {
       var tagIds = selectedTags.map((tag) => tag.id);
       const token = await getAccessTokenSilently();
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      await axios
+      if (switchChecked) {
+        await axios
+        .put("/api/clothings/random/favourites", {
+            Tags: tagIds,
+        })
+        .then((response) => {
+          setClothes([...response.data]);
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
+      } else {
+        await axios
         .put("/api/clothings/random", {
             Tags: tagIds,
         })
@@ -62,6 +86,7 @@ function Home() {
         .catch((error) => {
           toast.error(error.message);
         });
+      }
     }
 
     return (
@@ -80,6 +105,13 @@ function Home() {
                             alignItems="center"
                             sx={{mt: 2}}
                         >
+                            <FormGroup>
+                                <FormControlLabel control={
+                                <Switch
+                                    checked={switchChecked}
+                                    onChange={handleSwitchChange}/>}
+                                label="Favorites Only" /> 
+                            </FormGroup>
                             <Select
                                     multiple
                                     value={selectedTags}

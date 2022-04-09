@@ -57,6 +57,40 @@ namespace backend.Controllers
             return clothings;
         }
 
+        // PUT: api/clothings/random/favourites
+        [HttpPut("random/favourites")]
+        public async Task<ActionResult<IEnumerable<Clothing>>> GetRandomFavouriteClothings(Dictionary<String, String[]> requestBody)
+        {
+            requestBody.TryGetValue("Tags", out String[] sTags);
+            Collection<Clothing> clothings = new Collection<Clothing>();
+            foreach (String TagId in sTags)
+            {
+                try
+                {
+                    int Tagid = Int32.Parse(TagId);
+                    Tag tag = await _context.Tags.Include(i => i.Clothings
+                        .Where(Clothings => Clothings.isFavorite == true)).Where(i => i.Id == Tagid).FirstAsync();
+                    int randomIndex = new Random().Next(0, tag.Clothings.Count);
+                    int currentIntex = 0;
+                    foreach (Clothing clothing in tag.Clothings)
+                    {
+                        if (currentIntex == randomIndex)
+                        {
+                            clothings.Add(clothing);
+                            break;
+                        }
+                        currentIntex++;
+                    }
+                }
+                catch (FormatException)
+                {
+                    return BadRequest();
+                }
+            }
+
+            return clothings;
+        }
+
 
         // POST: api/Clothings
         [HttpPost]
