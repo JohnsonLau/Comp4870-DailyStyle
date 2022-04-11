@@ -17,3 +17,22 @@ https://black-field-037c2131e.1.azurestaticapps.net/
 
 backend deployed on Azure
 http://daily-style-backend.azurewebsites.net/
+
+## Installation instruction
+
+# Prerequisites
+- npm
+- dotnet
+
+# Installation
+1.  clone this repo
+2.  cd into /frontend, `cd frontend`
+3.  run `npm i` to install dependencies
+4.  run `npm run start`
+5.  cd into /backend, `cd backend`
+6.  run `dotnet run`
+
+## Contacts
+- Reo (@reotam5)
+- Edmond (@WongEK)
+- Johnson (@JohnsonLau)
