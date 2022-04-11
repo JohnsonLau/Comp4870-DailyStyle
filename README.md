@@ -33,6 +33,6 @@ http://daily-style-backend.azurewebsites.net/
 6.  run `dotnet run`
 
 ## Contacts
-- Reo (@reotam5)
-- Edmond (@WongEK)
-- Johnson (@JohnsonLau)
+- Reo ([@reotam5](https://github.com/reotam5))
+- Edmond ([@WongEK](https://github.com/WongEK))
+- Johnson ([@JohnsonLau](https://github.com/JohnsonLau))
